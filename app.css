@@ -1,0 +1,89 @@
+@charset 'UTF-8';
+
+/* 基本設定 */
+html {
+  font-size: 16px;
+	font-family: sans-serif;
+  touch-action: manipulation;
+}
+/* スマホ画面風の設定 */
+.smartPhone {
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+/* 選択不可、イベント透過 */
+.selectNone {
+	pointer-events: none;
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer */
+	-khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+	-webkit-user-select: none; /* Chrome, Safari, and Opera */
+	-webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+
+.clickText {
+	color: #fff;
+	font-weight: bold;
+}
+/* 強調表示 */
+.empha {
+	display: inline-block;
+	font-size: 150%;
+	font-weight: bold;
+ }
+/* ==================================== */
+
+.red {
+	background-color: #ff4500;
+	color: #fff;
+}
+.green {
+	color: #fff;
+	background-color: #a0ce00; 
+}
+.blue {
+	background-color: #54bbc1;
+	color: #fff; 
+}
+.grayout {
+	background-color: #ddd;
+	color: #aaa; 
+}
+
+.center {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* ==================================== */
+/* ボタン */
+.btnCircle {
+  font-size: 150%;
+  margin-bottom: 1.5em;
+  width: 8em;
+  height: 8em;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}/* 無効時 */
+.btnCircle:disabled {
+  /* ゲーム終了時 */
+  font-weight: bold;
+  background-color: #ff4500;
+  color: #fff;
+}
+
+/* ボタン */
+.btnRct {
+  font-size: 100%;
+  margin: 1em 0 0;
+  padding: .5em 1em;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}

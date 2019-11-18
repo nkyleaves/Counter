@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- PWA -->
+	<!-- iOS -->
+	<meta name="apple-mobile-web-app-capable" content="yes"><!-- アドレスバー等のブラウザのUIを非表示 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"><!-- default（Safariと同じ） / black（黒） / black-translucent（ステータスバーをコンテンツに含める） -->
+	<meta name="apple-mobile-web-app-title" content="Counter"><!-- ホーム画面に表示されるアプリ名 -->
+	<link rel="apple-touch-icon" href="images/icons/icon-152x152.png"><!-- ホーム画面に表示されるアプリアイコン -->
+	<!-- Android -->
+	<link rel="manifest" href="manifest.json"><!-- ウェブアプリマニフェストの読み込み -->
+	<!-- ServiceWorkerの登録 -->
+	<script>
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('sw.js')
+			.then((reg) => { /* console.log('SW registered.', reg); */ });
+	}
+	</script>
+	<!-- end PWA -->
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Counter</title>
+	<link rel="stylesheet" type="text/css" href="app.css">
+	<link rel="icon" type="image/png" href="/apps/Counter/favicon.png">
+</head>
+
+<!-- body -->
+<body>
+
+<div id="smartPhone" class="smartPhone">
+	<h1>Counter</h1>
+	<button id="btnCount" class="btnCircle green">
+		<span id="btnText"></span>　回
+		<br>クリック
+	</button>
+	<div>
+		<div>レベル　:　<span id="level" class="empha"></span>　[c/s]</div>
+		<div>残り　:　<span id="restPoint" class="empha"></span>　[s]</div>
+		<div>ベスト　:　<span id="bestClick" class="empha"></span>　[ms/c]</div>
+	</div>
+	<button id="resetBtn" onclick="resetGame(this)" class="btnRct blue">リセット</button>
+	<br><br>
+	<button id="installBtn" onclick="installApp(this)" class="btnRct blue" style="display:none;">ホーム画面に追加</button>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
