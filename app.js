@@ -196,28 +196,30 @@ resetGame()
 
 //=============================================================
 //PWA
-let deferredPrompt;
-//インストールバナー条件満足時
-window.addEventListener('beforeinstallprompt', function (event) {
-	console.log("beforeinstallprompt");
-  event.preventDefault();	//デフォルト動作をキャンセル
-	deferredPrompt = event;
-	l("installBtn").style.display = "inline";
-   return false;
-});
-
-//インストールダイアログの表示
-function installApp() {
-	if (deferredPrompt !== undefined) {
-		deferredPrompt.prompt();  // A2HSダイアログを表示する
-
-		deferredPrompt.userChoice.then(function (choiceResult) {
-			if (choiceResult.outcome === 'accepted') {
-				pushA2hsEvent('installed', 'home-icon');	//GAへイベント送信
-			} else {
-				pushA2hsEvent('dismissed', 'home-icon');
-			}
-			deferredPrompt = null;  // 一度しか使えないため後始末
-		});
-	}
+//バナー表示をキャンセルし、代わりに表示するDOM要素を登録する
+//引数１：イベントを登録するHTMLElement
+function registerInstallAppEvent(elem){
+	//インストールバナー表示条件満足時のイベントを乗っ取る
+	window.addEventListener('beforeinstallprompt', function (event) {
+		//console.log("beforeinstallprompt: ", event);
+		event.preventDefault();			//バナー表示をキャンセル
+		elem.promptEvent = event;		//eventを保持しておく
+		elem.style.display = "inline-block";	//要素を表示する
+		return false;
+	});
+	//インストールダイアログの表示処理
+	function installApp() {
+		if(elem.promptEvent){
+			elem.promptEvent.prompt();		//ダイアログ表示
+			elem.promptEvent.userChoice.then(function(choice){
+				//console.log(choice);
+				elem.style.display = "none";
+				elem.promptEvent = null;  //一度しか使えないため後始末
+			});//end then
+		}
+	}//end installApp
+	//要素クリック時にダイアログ表示を行う
+	elem.addEventListener("click", installApp);
 }
+//表示するボタンに、イベントを登録
+registerInstallAppEvent(document.getElementById("installBtn"));
